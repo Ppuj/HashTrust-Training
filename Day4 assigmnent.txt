@@ -1,0 +1,67 @@
+Ans-1:-  yes we can write code without JSX.
+        JSX convert into JavaScript like this   React.createElement('h1',null,'hello world')
+         babel convert JSX into JavaScript.
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-2:- it improves readability(bcz similar to html)  & maintainability.
+         cleaner and more concise code.
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-3:- No browser does not understand JSX ,babel transpiled code into regular JS and that is understood by browser.
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-4:- it will throw an error bcz browser does not know JSX[JSX is not valid JavaScript] 
+          for JSX work in the browser, we need to either:-use transpiler [like babel] or build tool (like webpack)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-5:- state is a built in object that stores data & information about component 
+         why we use?- to track dynamic data [data changes overtime]
+                      to make component interactive[by respond to user actions and events]	
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-6:- No, we cannot directly modify or update state in React. Directly changing the state will not trigger a re-render, meaning the UI will not update to reflect the changes. Instead, React provides state management methods like  'useState' to update state in a controlled way.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-7:-  we can update state variable by using useState hook, which provides two things:   1.The current state value,2.A function to update the state.
+          const [name,setname]=useState(initial value)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-8:- No, not anyone can update a state variable in React. State in React is private to the component that defines it. It is controlled exclusively by that component,
+        ensuring encapsulation and predictable behavior.
+         if we want that other component can also update state we need to do :- parent component manages the state and passes it down as props.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-9:- No, props are not mutable in React. They are read-only and cannot be modified by the child component.[bcz flow is unidirectional]
+        if we try to modify props it will not throw error but it is a bad practice and can lead unexpected bugs
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-10:- we can pass almost anything as props[string, number, objects, array, function, Components]
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-11:-if we use state variable we will update state using usestate ,react automatically re-renders the component and update the dom .
+        but if we use normal variable ,react does not detect changes ,so ui does not update automatically unless we explicitly re-render.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-12:-  props are used to pass data from parent to child component[Data sharing].Components can be reused with different props to create dynamic UIs[Reusability]
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-13:-there are multiple ways to pass data between components in React aside from using props.
+             Context API allows you to share data globally across components without manually passing props through the component tree.
+             "Lifting state" refers to moving a state variable to the closest common ancestor of two or more components that need to share the same state. 
+              You can pass functions as props to child components to allow them to send data or events back to the parent component.[Event Emitter]
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-14:- we can use functional component for better readability and simplicity,for improved performance,for modern react development,for code reusability.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-15:-Advantage:-simpler syntax
+                    Hooks for State and Lifecycle Management
+                    Improved performance
+                    easy to test
+                     Better code reusability
+       Disadvantage:-Limited Support Before React 16.8
+                       Performance Issues with Frequent Re-renders[if hooks not used properly]
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-16:- lifecycle methods are those which tells the process from creation to deletion phase.
+        1.Mounting:- The mounting phase is when a component is being created and inserted into the DOM.
+            constructor()---(called when component is initialized)
+             render()-------(return jsx on ui)
+             componentdidmount()------( called once the component has been rendered and mounted )
+        2.Updating Phase:-when any props and state changes the component re-render.
+             componentDidUpdate(prevProps, prevState, snapshot)
+        3.Unmounting phase:-when the component is being removed from the DOM.
+           componentWillUnmount()
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-17:- Keys are unique identifiers for elements in a list.
+         They help React optimize rendering by allowing it to efficiently update the DOM.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-18:- React maintains a Virtual DOM to optimize the process of updating the real DOM  The Virtual DOM is a lightweight copy of actual dom.
+          React compares the new Virtual DOM with the previous one to identify the changes.
+           React then calculates changes  and applies them to the real DOM in the most efficient way possible.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
