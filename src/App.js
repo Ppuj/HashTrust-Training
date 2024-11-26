@@ -4,6 +4,7 @@ import Text from './components/Text'
 import Button from './components/Button';
 import InputText from './components/InputText';
 import { useState } from 'react';
+import Form from './components/Form';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <InputText placeholder={'Enter your Name'} value={name} handleChange={setname}/>
       <Button label={Label} onClick={onClick}/>
       <Text message={displayname}/>
+      <Form/>
     </div>
   );
 }
