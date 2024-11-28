@@ -12,6 +12,7 @@ const Form = () => {
     const [confpassword, setconfpassword] = useState('')
     const [error, seterror] = useState({})
     const [arr, setarr] = useState([])
+    const [editIndex, setEditIndex] = useState(null);
     useEffect(() => {
         console.log(arr);
     }, [arr]);
@@ -45,20 +46,45 @@ const Form = () => {
     function handleSubmit(e) {
         e.preventDefault()
         if (validation()) {
-            setarr([...arr, { name, email, Dob, gender, profilePic: profilePic ? profilePic.name : null, education, password, confpassword }])
 
-            console.log(arr)
-            setname(' ')
-            setemail(' ')
-            setDob('')
-            setgender(' ')
-            setProfilePic(null)
-            setEducation(' ')
-            setpassword('')
-            setconfpassword('')
-            document.getElementById('profilePicInput').value = '';
+            if(editIndex!==null){
+             const newarr=[...arr]
+             newarr[editIndex]= { name, email, Dob, gender, profilePic: profilePic ? profilePic.name?profilePic.name:profilePic: null, education, password, confpassword }
+             setarr(newarr)
+             setEditIndex(null)
+            }else{
+            setarr([...arr, { name, email, Dob, gender, profilePic: profilePic ? profilePic.name : null, education, password, confpassword }])
+            }
+           resetForm()
         }
     }
+    function handleEdit(index) {
+        const selectedData = arr[index];
+        setname(selectedData.name);
+        setemail(selectedData.email);
+        setDob(selectedData.Dob);
+        setgender(selectedData.gender);
+        setProfilePic(selectedData.profilePic)
+        setEducation(selectedData.education);
+        setpassword(selectedData.password);
+        setconfpassword(selectedData.password);
+        setEditIndex(index);
+      }
+    function resetForm(){
+        setname(' ')
+        setemail(' ')
+        setDob('')
+        setgender(' ')
+        setProfilePic(null)
+        setEducation(' ')
+        setpassword('')
+        setconfpassword('')
+        document.getElementById('profilePicInput').value = '';
+    }
+    function handleDelete(index) {
+        const updatedArr = arr.filter((_, i) => i !== index);
+        setarr(updatedArr);
+      }
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -78,9 +104,9 @@ const Form = () => {
                 </div>
                 <div><label>Password:</label><input type='password' value={password} onChange={(e) => setpassword(e.target.value)} />{error.password && <p style={{ color: 'red' }}>{error.password}</p>}</div>
                 <div><label>confirm Password:</label><input type='password' value={confpassword} onChange={(e) => setconfpassword(e.target.value)} />{error.confpassword && <p style={{ color: 'red' }}>{error.confpassword}</p>}</div>
-                <button>Submit</button>
+                <button> {editIndex !== null ? "Update" : "Submit"}</button>
             </form>
-            <List array={arr} />
+            <List array={arr} handleDelete={handleDelete}  handleEdit={handleEdit}/>
         </>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const List = ({ array }) => {
+const List = ({ array,handleDelete ,handleEdit}) => {
     return <>
         <table style={{width:'100%',marginTop:'20px',textAlign:'left'}}>
             {array.length > 0 && <thead>
@@ -14,6 +14,7 @@ const List = ({ array }) => {
                     <th>Education</th>
                     <th>Password</th>
                     <th>confirmPassword</th>
+                    <th>Actons</th>
                 </tr>
             </thead>}
             <tbody>
@@ -27,6 +28,10 @@ const List = ({ array }) => {
                     <td>{item.education}</td>
                     <td>{item.password}</td>
                     <td>{item.confpassword}</td>
+                    <td>
+                        <button onClick={()=>handleEdit(index)}>Edit</button>
+                        <button onClick={()=>handleDelete(index)}>Delete</button>
+                    </td>
                 </tr>)}
             </tbody>
         </table>
