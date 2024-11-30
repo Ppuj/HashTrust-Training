@@ -1,0 +1,36 @@
+Ans-1  No,we should not keep all component states in the Redux store.it is generally intended for global state that needs to be shared across multiple components or different parts of the application. Storing all component-specific states in Redux can lead to unnecessary complexity, performance issues, and reduced maintainability.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-2  Redux is a state management library .It helps manage application state in a predictable and centralized way[The state is shared between multiple components.].
+        we have ACTION that tells what action we need to perform like add or delete and we have reducer which tells how to perform that action .
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-3 Actions are plain JavaScript objects that describe what happened in the application. They send information from the application to the Redux store.
+      Reducers are pure functions that specify how the state of the application changes in response to an action.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-4  Reducer must return a new state object rather than mutating the existing state directly. This is crucial for maintaining the predictability, immutability[State must not 
+       be mutated directly], and debuggability of the application’s state.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-5:-When an action is dispatched in a Redux application, all reducers are called by default, but they don’t necessarily do anything unless the action they receive is relevant      to them.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-6 Core Principle of redux:-
+      . Single Source of Truth- state of the entire application is stored in a single JavaScript object called the store
+      . State is Read-Only-The only way to change the state is by dispatching an action. This means no component, function, or event can directly modify the state itself.
+      . Changes are Made with Pure Functions (Reducers):-to change the state, you need to use a reducer, which is a pure function that accepts the current state and an action and returns a new state.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-7:-Centralized State Management:-Redux centralizes the entire application’s state in a single store
+       Improved Debugging and Development Experience
+       State Management in Large Applications
+       Easier Handling of Complex State Logic[using Action and reducer]
+      Predictable Flow of Data (Unidirectional Data Flow) 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ans-8:Redux workflow:-
+    1.Action Dispatching:-Event is dispatched as an action[user click button ,submit form].
+                          An action is a plain JS object that contains a type field and optionally a payload.
+    2.Action Reaches Reducer:-Once the action is dispatched, it is sent to the Redux store. The store holds the application's state and contains the logic for handling 
+                              action and updating the state.
+                             A reducer is a pure function, meaning it does not modify the existing state directly but returns a new state.
+    3.State Update:-The reducer processes the action and calculates a new state based on the action's type and payload.
+                    Redux ensures that the state is updated immutably, meaning the previous state is never directly modified; a new state object is returned instead.
+     4.UI Re-render:-After the state is updated, the React components that are connected to the Redux store are notified of the state change.
+                      React automatically re-renders components that are subscribed to the Redux state to reflect the new data.
+Unidirectional Data Flow: Redux enforces a unidirectional flow of data: Action → Reducer → Store → Component → View.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
