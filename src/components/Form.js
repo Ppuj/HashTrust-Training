@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import List from './List'
+import { useDispatch } from 'react-redux'
+import { Submitdata } from '../Action/Index'
 
 const Form = () => {
     const [name, setname] = useState('')
@@ -11,11 +13,12 @@ const Form = () => {
     const [password, setpassword] = useState('')
     const [confpassword, setconfpassword] = useState('')
     const [error, seterror] = useState({})
-    const [arr, setarr] = useState([])
+    // const [arr, setarr] = useState([])
     const [editIndex, setEditIndex] = useState(null);
-    useEffect(() => {
-        console.log(arr);
-    }, [arr]);
+    const dispatch=useDispatch()
+    // useEffect(() => {
+    //     console.log(arr);
+    // }, [arr]);
 
     function validation() {
         const newError = {}
@@ -47,29 +50,33 @@ const Form = () => {
         e.preventDefault()
         if (validation()) {
 
-            if(editIndex!==null){
-             const newarr=[...arr]
-             newarr[editIndex]= { name, email, Dob, gender, profilePic: profilePic ? profilePic.name?profilePic.name:profilePic: null, education, password, confpassword }
-             setarr(newarr)
-             setEditIndex(null)
-            }else{
-            setarr([...arr, { name, email, Dob, gender, profilePic: profilePic ? profilePic.name : null, education, password, confpassword }])
-            }
+            // if(editIndex!==null){
+            //  const newarr=[...arr]
+            //  newarr[editIndex]= { name, email, Dob, gender, profilePic: profilePic ? profilePic.name?profilePic.name:profilePic: null, education, password, confpassword }
+            //  setarr(newarr)
+            //  setEditIndex(null)
+            // }else{
+            // setarr([...arr, { name, email, Dob, gender, profilePic: profilePic ? profilePic.name : null, education, password, confpassword }])
+            // }
+
+            // ----------reduxcode----------
+            const formdata={name,email,Dob,gender,profilePic:profilePic?profilePic.name:null,education,password,confpassword}
+            dispatch(Submitdata(formdata))
            resetForm()
         }
     }
-    function handleEdit(index) {
-        const selectedData = arr[index];
-        setname(selectedData.name);
-        setemail(selectedData.email);
-        setDob(selectedData.Dob);
-        setgender(selectedData.gender);
-        setProfilePic(selectedData.profilePic)
-        setEducation(selectedData.education);
-        setpassword(selectedData.password);
-        setconfpassword(selectedData.password);
-        setEditIndex(index);
-      }
+    // function handleEdit(index) {
+    //     const selectedData = arr[index];
+    //     setname(selectedData.name);
+    //     setemail(selectedData.email);
+    //     setDob(selectedData.Dob);
+    //     setgender(selectedData.gender);
+    //     setProfilePic(selectedData.profilePic)
+    //     setEducation(selectedData.education);
+    //     setpassword(selectedData.password);
+    //     setconfpassword(selectedData.password);
+    //     setEditIndex(index);
+    //   }
     function resetForm(){
         setname(' ')
         setemail(' ')
@@ -81,10 +88,10 @@ const Form = () => {
         setconfpassword('')
         document.getElementById('profilePicInput').value = '';
     }
-    function handleDelete(index) {
-        const updatedArr = arr.filter((_, i) => i !== index);
-        setarr(updatedArr);
-      }
+    // function handleDelete(index) {
+    //     const updatedArr = arr.filter((_, i) => i !== index);
+    //     setarr(updatedArr);
+    //   }
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -106,7 +113,8 @@ const Form = () => {
                 <div><label>confirm Password:</label><input type='password' value={confpassword} onChange={(e) => setconfpassword(e.target.value)} />{error.confpassword && <p style={{ color: 'red' }}>{error.confpassword}</p>}</div>
                 <button> {editIndex !== null ? "Update" : "Submit"}</button>
             </form>
-            <List array={arr} handleDelete={handleDelete}  handleEdit={handleEdit}/>
+            {/* <List array={arr} handleDelete={handleDelete}  handleEdit={handleEdit}/> */}
+            <List/>
         </>
     )
 }
