@@ -1,8 +1,6 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
-const List = () => {
-    const array=useSelector((state)=>state.FormData.formarr||[])
+const List = ({array,handleDelete,handleEdit}) => {
     return <>
         <table style={{width:'100%',marginTop:'20px',textAlign:'left'}}>
             {array.length > 0 && <thead>
@@ -16,7 +14,7 @@ const List = () => {
                     <th>Education</th>
                     <th>Password</th>
                     <th>confirmPassword</th>
-                    {/* <th>Actons</th> */}
+                    <th>Actons</th>
                 </tr>
             </thead>}
             <tbody>
@@ -31,8 +29,8 @@ const List = () => {
                     <td>{item.password}</td>
                     <td>{item.confpassword}</td>
                     <td>
-                        {/* <button onClick={()=>handleEdit(index)}>Edit</button>
-                        <button onClick={()=>handleDelete(index)}>Delete</button> */}
+                         <button onClick={()=>handleEdit(index)}>Edit</button>
+                    <button onClick={()=>handleDelete(index)}>Delete</button> 
                     </td>
                 </tr>)}
             </tbody>

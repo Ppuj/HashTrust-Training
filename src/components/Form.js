@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import List from './List'
-import { useDispatch } from 'react-redux'
-import { Submitdata } from '../Action/Index'
+import { useDispatch ,useSelector} from 'react-redux'
+import { Submitdata,Deletedata ,Editdata} from '../Action/Index'
 
 const Form = () => {
     const [name, setname] = useState('')
@@ -15,6 +15,7 @@ const Form = () => {
     const [error, seterror] = useState({})
     // const [arr, setarr] = useState([])
     const [editIndex, setEditIndex] = useState(null);
+    const array=useSelector((state)=>state.FormData.formarr||[])
     const dispatch=useDispatch()
     // useEffect(() => {
     //     console.log(arr);
@@ -61,22 +62,26 @@ const Form = () => {
 
             // ----------reduxcode----------
             const formdata={name,email,Dob,gender,profilePic:profilePic?profilePic.name:null,education,password,confpassword}
-            dispatch(Submitdata(formdata))
+            if(editIndex!==null){
+              dispatch(Editdata(editIndex,formdata))
+              setEditIndex(null)
+            }else{
+            dispatch(Submitdata(formdata))}
            resetForm()
         }
     }
-    // function handleEdit(index) {
-    //     const selectedData = arr[index];
-    //     setname(selectedData.name);
-    //     setemail(selectedData.email);
-    //     setDob(selectedData.Dob);
-    //     setgender(selectedData.gender);
-    //     setProfilePic(selectedData.profilePic)
-    //     setEducation(selectedData.education);
-    //     setpassword(selectedData.password);
-    //     setconfpassword(selectedData.password);
-    //     setEditIndex(index);
-    //   }
+    function handleEdit(index) {
+        const selectedData = array[index];
+        setname(selectedData.name);
+        setemail(selectedData.email);
+        setDob(selectedData.Dob);
+        setgender(selectedData.gender);
+        setProfilePic(selectedData.profilePic)
+        setEducation(selectedData.education);
+        setpassword(selectedData.password);
+        setconfpassword(selectedData.password);
+        setEditIndex(index);
+      }
     function resetForm(){
         setname(' ')
         setemail(' ')
@@ -92,6 +97,9 @@ const Form = () => {
     //     const updatedArr = arr.filter((_, i) => i !== index);
     //     setarr(updatedArr);
     //   }
+      function handleDelete(index){
+        dispatch(Deletedata(index))
+      }
     return (
         <>
             <form onSubmit={handleSubmit}>
@@ -114,7 +122,7 @@ const Form = () => {
                 <button> {editIndex !== null ? "Update" : "Submit"}</button>
             </form>
             {/* <List array={arr} handleDelete={handleDelete}  handleEdit={handleEdit}/> */}
-            <List/>
+            <List array={array} handleDelete={handleDelete} handleEdit={handleEdit}/>
         </>
     )
 }

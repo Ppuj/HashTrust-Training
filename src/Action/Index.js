@@ -4,3 +4,15 @@ export const Submitdata=(formdata)=>{
       payload:formdata
     }
   }
+export const Deletedata=(index)=>{
+    return {
+        type:'Delete',
+        payload:index
+    }
+}
+export const Editdata=(index,editdata)=>{
+    return{
+        type:'Edit',
+        payload:{index,editdata}
+    }
+}
