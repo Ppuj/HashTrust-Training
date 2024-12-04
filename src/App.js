@@ -5,6 +5,7 @@ import Button from './components/Button';
 import InputText from './components/InputText';
 import { useState } from 'react';
 import Form from './components/Form';
+import RemainderApp from './components/RemainderApp';
 
 
 function App() {
@@ -18,11 +19,12 @@ function App() {
   }
   return (
     <div className="App">
-      <HelloWorld/>
+      {/* <HelloWorld/>
       <InputText placeholder={'Enter your Name'} value={name} handleChange={setname}/>
       <Button label={Label} onClick={onClick}/>
       <Text message={displayname}/>
-      <Form/>
+      <Form/> */}
+      <RemainderApp/>
     </div>
   );
 }
